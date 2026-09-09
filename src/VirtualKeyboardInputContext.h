@@ -54,8 +54,21 @@ class VirtualKeyboardInputContext : public QPlatformInputContext {
 
     /**
      * Simply calls the emitInputPanelVisibleChanged() function
+     *
+     * \note Automatic hide requests from Qt (e.g. the QLineEdit clears the
+     * input method when it loses focus) are ignored, so the keyboard stays
+     * open on focus loss. The only way to close the keyboard is the explicit
+     * user request via requestHide() (the hide key on the keyboard).
      */
     virtual void hideInputPanel();
+
+    /**
+     * Hides the keyboard on explicit user request (the hide key on the
+     * keyboard). This is the only way to close the keyboard: automatic
+     * hide requests from Qt (e.g. input widget focus loss) are ignored
+     * by hideInputPanel().
+     */
+    Q_INVOKABLE void requestHide();
 
     /**
      * Returns input panel visibility status.

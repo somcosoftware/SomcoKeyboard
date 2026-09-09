@@ -4,7 +4,9 @@
 #include <QObject>
 #include <QString>
 #include <QUrl>
-#include <QtQmlIntegration>
+// qqml.h provides the QML_* registration macros on Qt 6 (via QtQmlIntegration)
+// as well as on Qt 5.15, so it is safe to include on both major versions.
+#include <qqml.h>
 
 class KeyboardTheme : public QObject
 {

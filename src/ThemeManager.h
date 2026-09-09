@@ -3,6 +3,7 @@
 #include "KeyboardTheme.h"
 #include <QObject>
 #include <QQmlListProperty>
+#include <qqml.h> // QML_SINGLETON (works on Qt 5 and Qt 6)
 
 class ThemeManager : public QObject
 {

@@ -1,6 +1,6 @@
 import QtQuick 2.0
-import QtQuick.Controls.Basic
-import QtQuick.Layouts
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
 import SomcoKeyboard 1.0
 
 Button {

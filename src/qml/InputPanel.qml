@@ -13,7 +13,7 @@ Item {
     property int spacing: 16
     property int margins: 16
 
-    property list<KeyboardTheme> themes: []
+    property list<KeyboardTheme> themes
     property string themeName
 
     /*! \internal */

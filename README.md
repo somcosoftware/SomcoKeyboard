@@ -1,5 +1,7 @@
 # 🎹 SomcoKeyboard
 
+**English** | [简体中文](README.zh-CN.md)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Built with Qt](https://img.shields.io/badge/Built%20with-Qt-41CD52?logo=qt)](https://qt.io)
 

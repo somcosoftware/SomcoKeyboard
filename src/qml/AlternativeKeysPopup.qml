@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import QtQuick.Layouts
+import QtQuick.Layouts 1.15
 import SomcoKeyboard 1.0
 
 Item {

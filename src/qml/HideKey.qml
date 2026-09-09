@@ -8,5 +8,5 @@ Key {
     btnBackground: "transparent"
     btnIcon: ThemeManager.currentTheme.hideKeyboardIcon
     weight: 112
-    onClicked: Qt.inputMethod.hide()
+    onClicked: InputContext.requestHide()
 }

@@ -15,9 +15,16 @@ QQmlListProperty<KeyboardTheme> ThemeManager::availableThemes()
             auto self = static_cast<ThemeManager*>(list->data);
             self->addTheme(theme);
         },
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         [](QQmlListProperty<KeyboardTheme>* list) -> qsizetype { return static_cast<ThemeManager*>(list->data)->m_availableThemes.count(); },
         [](QQmlListProperty<KeyboardTheme>* list, qsizetype index) -> KeyboardTheme*
         { return static_cast<ThemeManager*>(list->data)->m_availableThemes.at(index); },
+#else
+        // Qt 5 uses int instead of qsizetype in QQmlListProperty.
+        [](QQmlListProperty<KeyboardTheme>* list) -> int { return static_cast<ThemeManager*>(list->data)->m_availableThemes.count(); },
+        [](QQmlListProperty<KeyboardTheme>* list, int index) -> KeyboardTheme*
+        { return static_cast<ThemeManager*>(list->data)->m_availableThemes.at(index); },
+#endif
         [](QQmlListProperty<KeyboardTheme>* list)
         {
             static_cast<ThemeManager*>(list->data)->m_availableThemes.clear();
@@ -48,7 +55,7 @@ void ThemeManager::addTheme(KeyboardTheme* theme)
 
 void ThemeManager::setTheme(const QString& name)
 {
-    for (auto theme : std::as_const(m_availableThemes))
+    for (auto theme : qAsConst(m_availableThemes))
     {
         if (theme->themeName() == name)
         {
