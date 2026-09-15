@@ -15,6 +15,9 @@ SomcoKeyboard is a lightweight, production-ready on-screen virtual keyboard desi
 
 ✨ **Zero configuration needed** — just integrate and go. Comprehensive customization available for advanced use cases.
 
+> 📖 **Considering SomcoKeyboard as an alternative to Qt Virtual Keyboard?**
+> Read our article: [Alternative to Qt Virtual Keyboard – Introducing SomcoKeyboard](https://somcosoftware.com/en/blog/alternative-to-qt-virtual-keyboard-introducing-somco-keyboard)
+
 ---
 
 ## ✨ Features
@@ -182,8 +185,8 @@ Please follow standard Qt coding conventions.
 - 🎨 Enhance UI/UX
 - 💡 Suggest features
 
-## About Somco Software (previously Scythe Studio)
-[Somco Software (previously Scythe Studio)](https://somcosoftware.com/en/) is an embedded and cross-platform software development company with a strong focus on Qt and C++, delivering reliable, high-quality solutions for regulated industries, with particular expertise in medical devices. We are an ISO 9001 and ISO 13485 certified software house, specializing in GUI development, Linux-based systems, and advanced connectivity solutions. Somco Software is an official Qt Service Partner and a trusted partner of leading hardware manufacturers.
+## About Somco Software
+[Somco Software](https://somcosoftware.com/en/) is an embedded and cross-platform software development company with a strong focus on Qt and C++, delivering reliable, high-quality solutions for regulated industries, with particular expertise in medical devices. We are an ISO 9001 and ISO 13485 certified software house, specializing in GUI development, Linux-based systems, and advanced connectivity solutions. Somco Software is an official Qt Service Partner and a trusted partner of leading hardware manufacturers.
 
 <table align="center" style="margin: 0 auto; border: none;">
     <tr style="border: none;">
