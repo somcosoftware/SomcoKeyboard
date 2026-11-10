@@ -87,10 +87,14 @@ ColumnLayout {
         }
 
         Key {
-            btnKey: Qt.locale(
-                        ).decimalPoint === "," ? Qt.Key_Comma : Qt.Key_Period
-            text: Qt.locale().decimalPoint === "," ? "," : "."
-            alternativeKeys: Qt.locale().decimalPoint === "," ? "." : ","
+            // Formatted numbers (IP addresses, versions) need a period whatever the locale.
+            readonly property bool comma: Qt.locale().decimalPoint === ","
+                                          && !(InputContext.inputItem
+                                               && (InputContext.inputItem.inputMethodHints
+                                                   & Qt.ImhFormattedNumbersOnly))
+            btnKey: comma ? Qt.Key_Comma : Qt.Key_Period
+            text: comma ? "," : "."
+            alternativeKeys: comma ? "." : ","
             inputPanelRef: root.inputPanel
         }
 
