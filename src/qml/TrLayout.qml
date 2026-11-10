@@ -181,7 +181,7 @@ ColumnLayout {
 
         ShiftKey {
             objectName: root.inputPanel.objectName + "Key_Shift_Left"
-            weight: 208
+            weight: 173
             inputPanelRef: root.inputPanel
         }
 
@@ -240,9 +240,17 @@ ColumnLayout {
             inputPanelRef: root.inputPanel
         }
 
+        // Turkish Q keyboards end this row with the period key.
+        Key {
+            btnKey: Qt.Key_Period
+            text: "."
+            alternativeKeys: ",:"
+            inputPanelRef: root.inputPanel
+        }
+
         ShiftKey {
             objectName: root.inputPanel.objectName + "Key_Shift_Right"
-            weight: 208
+            weight: 173
             inputPanelRef: root.inputPanel
         }
     }
