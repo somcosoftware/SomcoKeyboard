@@ -24,6 +24,12 @@ public:
     QQuickFlickable* Flickable;
     QQuickItem* FocusItem;
     bool Visible;
+    /**
+     * Gate for explicit hide requests: only requestHide() (the hide key on
+     * the keyboard) sets this flag, so automatic hide requests from Qt
+     * (e.g. input widget focus loss) are ignored by hideInputPanel().
+     */
+    bool UserHideRequested{false};
     DeclarativeInputEngine* InputEngine;
     ThemeManager* Themes;
     QPropertyAnimation* FlickableContentScrollAnimation{nullptr};
@@ -87,6 +93,14 @@ void VirtualKeyboardInputContext::showInputPanel()
 
 void VirtualKeyboardInputContext::hideInputPanel()
 {
+    // Ignore automatic hide requests from Qt (e.g. QLineEdit clears the input
+    // method on focus out, which used to close the keyboard). The keyboard
+    // stays open on focus loss and can only be closed via requestHide().
+    if (!d->UserHideRequested)
+    {
+        return;
+    }
+    d->UserHideRequested = false;
     if (d->FocusItem && d->FocusItem->inputMethodQuery(Qt::ImEnabled).toBool())
     {
         // if the current focus item accepts input, clear its focus to ensure visual consistency
@@ -95,6 +109,13 @@ void VirtualKeyboardInputContext::hideInputPanel()
     d->Visible = false;
     QPlatformInputContext::hideInputPanel();
     emitInputPanelVisibleChanged();
+}
+
+void VirtualKeyboardInputContext::requestHide()
+{
+    // Mark the request as user-initiated so hideInputPanel() accepts it
+    d->UserHideRequested = true;
+    hideInputPanel();
 }
 
 bool VirtualKeyboardInputContext::isInputPanelVisible() const { return d->Visible; }
@@ -121,7 +142,9 @@ void VirtualKeyboardInputContext::setFocusObject(QObject* object)
     bool AcceptsInput = d->FocusItem->inputMethodQuery(Qt::ImEnabled).toBool();
     if (!AcceptsInput)
     {
-        hideInputPanel();
+        // Focus moved to a non-input item inside QML: close the keyboard on
+        // purpose (explicit internal request, not an automatic Qt hide)
+        requestHide();
         return;
     }
 
@@ -151,8 +174,10 @@ void VirtualKeyboardInputContext::setFocusObject(QObject* object)
     visibleConnection = QObject::connect(d->FocusItem, &QQuickItem::visibleChanged, this,
                                          [this]
                                          {
+                                             // The input item itself disappeared (e.g. page
+                                             // switch): keep closing the keyboard in that case
                                              if (!d->FocusItem->isVisible())
-                                                 hideInputPanel();
+                                                 requestHide();
                                              else
                                                  showInputPanel();
                                          });

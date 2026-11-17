@@ -17,6 +17,11 @@ jobs:
           - name: "CMake Qt6"
             qt-version: "6.8.3"
             build-system: cmake
+            qt-cmake-var: Qt6_DIR
+          - name: "CMake Qt5"
+            qt-version: "5.15.2"
+            build-system: cmake
+            qt-cmake-var: Qt5_DIR
 
     name: ${{ matrix.name }}
 
@@ -38,7 +43,7 @@ jobs:
 
       - name: Configure Project with CMake
         if: matrix.build-system == 'cmake'
-        run: cmake -S . -B build -GNinja
+        run: cmake -S . -B build -GNinja -DCMAKE_PREFIX_PATH="${${{ matrix.qt-cmake-var }}}"
 
       - name: Build with CMake
         if: matrix.build-system == 'cmake'

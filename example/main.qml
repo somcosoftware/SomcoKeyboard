@@ -1,9 +1,10 @@
-import QtQuick
-import QtQuick.Controls.Basic
-import QtQuick.Layouts
-import QtQuick.Window
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
+import QtQuick.Window 2.15
 
 import QtQuick.SomcoKeyboard 1.0
+import SomcoKeyboard 1.0
 
 ApplicationWindow {
     id: window
@@ -47,7 +48,7 @@ ApplicationWindow {
             }
         }
         Keys.onEscapePressed: {
-            Qt.inputMethod.hide()
+            InputContext.requestHide()
         }
     }
 
